@@ -1,0 +1,124 @@
+﻿<!-- TITULO DE PAGINA -->
+
+<div class="row mt-5" style="margin-top:150px">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="alert alert-primary">
+            <h4 class="text-center">
+                <i class="bi-emoji-sunglasses"></i> Lista de Examenes <i class="bi-emoji-sunglasses"></i>
+            </h4>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+<!-- BOTÓN DE NUEVO -->
+<div class="row mt-3">
+    <div class="col-1"></div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary" onclick="examenesIns();">
+            <i class="bi-plus-square"></i> Añadir examen
+        </button>
+    </div>
+    <div class="col-7"></div>
+</div>
+
+<!-- GRILLA DE DATOS -->
+<div class="row mt-1">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <td>Nombre</td>
+                    <td>Descripción</td>
+                    <td>Duración</td>
+                    <td>Fecha Publicación</td>
+                    <td>Mínima Nota</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var t in ViewBag.Lista)
+                {
+                <tr>
+                    <td id="titulo_@t.idexamen">@t.titulo</td>
+                    <td id="descripcion_@t.idexamen" class="text-end">@t.descripcion</td>
+                    <td id="duracion_@t.idexamen">@t.duracion</td>
+                    <td id="publicacion_@t.idexamen">@t.publicacion</td>
+                    <td id="minimanota_@t.idexamen">@t.minimanota</td>
+                    <td style="width:20px">
+                        @*<button type="button" class="btn btn-danger" onclick="amigosDel('@t.idamigo')">
+                            <i class="bi-trash"></i>
+                        </button>*@
+                    </td>
+                    <td style="width:20px">
+                        @*<button type="button" class="btn btn-success" onclick="amigosUpd('@t.idamigo')">
+                            <i class="bi-pencil"></i>
+                        </button>*@
+                    </td>
+                </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<!-- DIALOGO AMIGOS -->
+
+<div id="dlg_examenes" class="modal fade show" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header" style="background-color: #d3e9fa">
+                    <h5 id="dlg_examenes_title" class="modal-title">Nuevo Examen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="tbl_examenes_accion" />
+                    <input type="hidden" id="tbl_examenes_idexamen" />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="tbl_amigos_titulo">Titulo</label>
+                            <input type="text" class="form-control" id="tbl_examenes_titulo" placeholder="ingrese titulo del examen">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 col-lg-8">
+                            <label for="tbl_amigos_tipo">Descripcion</label>
+                            <input type="text" class="form-control" id="tbl_examenes_descripcion" placeholder="ingrese descripcion">
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <label for="tbl_tutoriales_precio">Duración</label>
+                            <input type="text" class="form-control text-end" id="tbl_examenes_duracion" placeholder="ingrese duracion">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 col-lg-8">
+                            <label for="tbl_amigos_tipo">Fecha Publicacion</label>
+                            <input type="date" class="form-control" id="tbl_examenes_fechapub">
+                        </div>
+                        <div class="col-md-12 col-lg-8">
+                            <label for="tbl_amigos_tipo">Minima Nota</label>
+                            <input type="text" class="form-control" id="tbl_examenes_minimanota">
+                        </div>
+                    </div>
+
+                    <div id="dlg_amigos_errores" style="margin: 16px 30px;color: #900"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="examenesInsUpd();" style="width: 120px;margin-right: 12px">Guardar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 120px">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
